@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Test Case Form View -->
+        <record id="view_qa_test_case_form" model="ir.ui.view">
+            <field name="name">qa.test.case.form</field>
+            <field name="model">qa.test.case</field>
+            <field name="arch" type="xml">
+                <form string="Test Case">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="not_started,in_progress,pass,fail,blocked"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="tc_id"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="project_id"/>
+                                <field name="module_id"/>
+                                <field name="section"/>
+                                <field name="priority"/>
+                            </group>
+                            <group>
+                                <field name="assigned_tester_id"/>
+                                <field name="testing_type_id"/>
+                                <field name="environment"/>
+                                <field name="build_version"/>
+                                <field name="execution_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Test Details" name="details">
+                                <group>
+                                    <field name="scenario"/>
+                                    <field name="pre_condition"/>
+                                    <field name="test_steps"/>
+                                    <field name="test_data"/>
+                                    <field name="expected_result"/>
+                                </group>
+                            </page>
+                            <page string="Execution" name="execution">
+                                <group>
+                                    <field name="actual_result"/>
+                                    <field name="notes"/>
+                                </group>
+                            </page>
+                            <page string="Linked Bugs" name="bugs">
+                                <field name="bug_ids">
+                                    <list>
+                                        <field name="bug_id"/>
+                                        <field name="title"/>
+                                        <field name="status"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Test Case Tree View -->
+        <record id="view_qa_test_case_list" model="ir.ui.view">
+            <field name="name">qa.test.case.list</field>
+            <field name="model">qa.test.case</field>
+            <field name="arch" type="xml">
+                <list string="Test Cases">
+                    <field name="tc_id"/>
+                    <field name="project_id"/>
+                    <field name="module_id"/>
+                    <field name="scenario"/>
+                    <field name="priority"/>
+                    <field name="assigned_tester_id"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Test Case Action -->
+        <record id="action_qa_test_case" model="ir.actions.act_window">
+            <field name="name">Test Cases</field>
+            <field name="res_model">qa.test.case</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create your first QA Test Case
+              </p>
+            </field>
+        </record>
+
+        <!-- Test Case Menu -->
+        <menuitem id="qa_test_case_menu" 
+                  name="Test Cases" 
+                  parent="qa_management_menu_testing" 
+                  action="action_qa_test_case" 
+                  sequence="10"/>
+
+    </data>
+</odoo>

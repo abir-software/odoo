@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Test Case Graph View -->
+        <record id="view_qa_test_case_graph" model="ir.ui.view">
+            <field name="name">qa.test.case.graph</field>
+            <field name="model">qa.test.case</field>
+            <field name="arch" type="xml">
+                <graph string="Test Cases Summary" type="pie">
+                    <field name="status"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Bug Graph View -->
+        <record id="view_qa_bug_graph" model="ir.ui.view">
+            <field name="name">qa.bug.graph</field>
+            <field name="model">qa.bug</field>
+            <field name="arch" type="xml">
+                <graph string="Bugs Summary" type="bar">
+                    <field name="status"/>
+                    <field name="severity"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Global Dashboard Action for Test Cases -->
+        <record id="action_qa_dashboard_test_cases" model="ir.actions.act_window">
+            <field name="name">Test Cases Dashboard</field>
+            <field name="res_model">qa.test.case</field>
+            <field name="view_mode">graph,list,form</field>
+        </record>
+
+        <!-- Global Dashboard Action for Bugs -->
+        <record id="action_qa_dashboard_bugs" model="ir.actions.act_window">
+            <field name="name">Bugs Dashboard</field>
+            <field name="res_model">qa.bug</field>
+            <field name="view_mode">graph,list,form</field>
+        </record>
+
+        <!-- Dashboard Menus -->
+        <menuitem id="qa_dashboard_menu" 
+                  name="Dashboard" 
+                  parent="qa_management_menu_root" 
+                  sequence="5"/>
+
+        <menuitem id="qa_dashboard_tc_menu" 
+                  name="Test Cases" 
+                  parent="qa_dashboard_menu" 
+                  action="action_qa_dashboard_test_cases" 
+                  sequence="10"/>
+
+        <menuitem id="qa_dashboard_bug_menu" 
+                  name="Bugs" 
+                  parent="qa_dashboard_menu" 
+                  action="action_qa_dashboard_bugs" 
+                  sequence="20"/>
+
+    </data>
+</odoo>

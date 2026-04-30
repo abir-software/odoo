@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Project Form View -->
+        <record id="view_qa_project_form" model="ir.ui.view">
+            <field name="name">qa.project.form</field>
+            <field name="model">qa.project</field>
+            <field name="arch" type="xml">
+                <form string="QA Project">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="draft,active,uat,ready,completed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_view_modules" type="object" icon="fa-cubes">
+                                <field string="Modules" name="module_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="action_view_test_cases" type="object" icon="fa-check-square-o">
+                                <field string="Test Cases" name="test_case_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="action_view_bugs" type="object" icon="fa-bug">
+                                <field string="Bugs" name="bug_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="odoo_project_id" class="oe_edit_only" string="Select Project"/>
+                            <h1>
+                                <field name="odoo_project_id" placeholder="Select Project from List..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" invisible="1"/>
+                                <field name="code"/>
+                                <field name="client_name"/>
+                                <field name="project_manager_id"/>
+                                <field name="qa_lead_id"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="target_go_live_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Modules" name="modules">
+                                <field name="module_ids"/>
+                            </page>
+                            <page string="Description" name="description">
+                                <field name="description" placeholder="Project details..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Project Tree View -->
+        <record id="view_qa_project_list" model="ir.ui.view">
+            <field name="name">qa.project.list</field>
+            <field name="model">qa.project</field>
+            <field name="arch" type="xml">
+                <list string="QA Projects">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="client_name"/>
+                    <field name="qa_lead_id"/>
+                    <field name="target_go_live_date"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Project Action -->
+        <record id="action_qa_project" model="ir.actions.act_window">
+            <field name="name">Projects</field>
+            <field name="res_model">qa.project</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create your first QA Project
+              </p>
+            </field>
+        </record>
+
+        <!-- Project Menu -->
+        <menuitem id="qa_project_menu" 
+                  name="Projects" 
+                  parent="qa_management_menu_projects" 
+                  action="action_qa_project" 
+                  sequence="10"/>
+
+    </data>
+</odoo>

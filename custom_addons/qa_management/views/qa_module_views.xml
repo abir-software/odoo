@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Module Form View -->
+        <record id="view_qa_module_form" model="ir.ui.view">
+            <field name="name">qa.module.form</field>
+            <field name="model">qa.module</field>
+            <field name="arch" type="xml">
+                <form string="QA Module">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="not_started,in_progress,completed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Module Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="project_id"/>
+                                <field name="priority"/>
+                            </group>
+                            <group>
+                                <field name="testing_type_ids" widget="many2many_tags"/>
+                                <field name="assigned_tester_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description" name="description">
+                                <field name="description" placeholder="Module details..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Module Tree View -->
+        <record id="view_qa_module_list" model="ir.ui.view">
+            <field name="name">qa.module.list</field>
+            <field name="model">qa.module</field>
+            <field name="arch" type="xml">
+                <list string="QA Modules">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <field name="priority"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Module Action -->
+        <record id="action_qa_module" model="ir.actions.act_window">
+            <field name="name">Modules</field>
+            <field name="res_model">qa.module</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create your first QA Module
+              </p>
+            </field>
+        </record>
+
+        <!-- Module Menu -->
+        <menuitem id="qa_module_menu" 
+                  name="Modules" 
+                  parent="qa_management_menu_projects" 
+                  action="action_qa_module" 
+                  sequence="20"/>
+
+    </data>
+</odoo>

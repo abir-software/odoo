@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Bug Form View -->
+        <record id="view_qa_bug_form" model="ir.ui.view">
+            <field name="name">qa.bug.form</field>
+            <field name="model">qa.bug</field>
+            <field name="arch" type="xml">
+                <form string="Bug">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="open,in_progress,fixed,retest,closed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="bug_id"/>
+                            </h1>
+                            <h2>
+                                <field name="title" placeholder="Bug Title"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="project_id"/>
+                                <field name="module_id"/>
+                                <field name="test_case_id"/>
+                                <field name="section_function"/>
+                            </group>
+                            <group>
+                                <field name="severity"/>
+                                <field name="priority"/>
+                                <field name="assigned_developer_id"/>
+                                <field name="reported_by_id"/>
+                                <field name="reported_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Reproduction Details" name="reproduction">
+                                <group>
+                                    <field name="steps_to_reproduce"/>
+                                    <field name="test_data"/>
+                                    <field name="expected_result"/>
+                                    <field name="actual_result"/>
+                                </group>
+                            </page>
+                            <page string="Environment &amp; Tracking" name="tracking">
+                                <group>
+                                    <field name="environment"/>
+                                    <field name="build_version"/>
+                                    <field name="fixed_date"/>
+                                    <field name="closed_date"/>
+                                </group>
+                            </page>
+                            <page string="Comments" name="comments">
+                                <group>
+                                    <field name="dev_comments"/>
+                                    <field name="qa_comments"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Bug Tree View -->
+        <record id="view_qa_bug_list" model="ir.ui.view">
+            <field name="name">qa.bug.list</field>
+            <field name="model">qa.bug</field>
+            <field name="arch" type="xml">
+                <list string="Bugs">
+                    <field name="bug_id"/>
+                    <field name="title"/>
+                    <field name="project_id"/>
+                    <field name="severity"/>
+                    <field name="priority"/>
+                    <field name="assigned_developer_id"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Bug Action -->
+        <record id="action_qa_bug" model="ir.actions.act_window">
+            <field name="name">Bugs</field>
+            <field name="res_model">qa.bug</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Report your first QA Bug
+              </p>
+            </field>
+        </record>
+
+        <!-- Bug Menu -->
+        <menuitem id="qa_bug_menu" 
+                  name="Bugs" 
+                  parent="qa_management_menu_bugs" 
+                  action="action_qa_bug" 
+                  sequence="10"/>
+
+    </data>
+</odoo>

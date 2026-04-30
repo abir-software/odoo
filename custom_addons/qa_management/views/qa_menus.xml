@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Main Application Menu -->
+        <menuitem id="qa_management_menu_root" 
+                  name="QA Management" 
+                  sequence="10" 
+                  web_icon="qa_management,static/description/icon.png"/>
+
+        <!-- Top Level Menus -->
+        <menuitem id="qa_management_menu_projects" 
+                  name="Projects" 
+                  parent="qa_management_menu_root" 
+                  sequence="10"/>
+
+        <menuitem id="qa_management_menu_testing" 
+                  name="Testing" 
+                  parent="qa_management_menu_root" 
+                  sequence="20"/>
+
+        <menuitem id="qa_management_menu_bugs" 
+                  name="Bugs &amp; Issues" 
+                  parent="qa_management_menu_root" 
+                  sequence="30"/>
+
+        <menuitem id="qa_management_menu_reports" 
+                  name="Reports" 
+                  parent="qa_management_menu_root" 
+                  sequence="40"/>
+
+        <menuitem id="qa_management_menu_config" 
+                  name="Configuration" 
+                  parent="qa_management_menu_root" 
+                  sequence="100"/>
+                  
+    </data>
+</odoo>
